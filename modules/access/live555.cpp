@@ -1213,7 +1213,10 @@ static int Demux( demux_t *p_demux )
     for( i = 0; i < p_sys->i_track; i++ )
     {
         live_track_t *tk = p_sys->track[i];
-
+		u_int32_t a = tk->sub->rtpSource()->curPacketRTPTimestamp();
+		char tmp[512];
+		sprintf_s(tmp, "rtp timestamp:%u", a);
+		msg_Dbg(p_demux, tmp);
         if( tk->p_es )
         {
             bool b;
@@ -1788,7 +1791,7 @@ static void StreamRead( void *p_private, unsigned int i_size,
     demux_sys_t    *p_sys = p_demux->p_sys;
     block_t        *p_block;
 
-    //msg_Dbg( p_demux, "pts: %d", pts.tv_sec );
+    msg_Dbg( p_demux, "pts: %d", pts.tv_sec );
 
     int64_t i_pts = (int64_t)pts.tv_sec * INT64_C(1000000) +
         (int64_t)pts.tv_usec;

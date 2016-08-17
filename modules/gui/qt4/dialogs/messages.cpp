@@ -89,7 +89,7 @@ MessagesDialog::MessagesDialog( intf_thread_t *_p_intf)
     /* Buttons and general layout */
     ui.saveLogButton->setToolTip( qtr( "Saves all the displayed logs to a file" ) );
 
-    int i_verbosity = var_InheritInteger( p_intf, "verbose" );
+    int i_verbosity = /*var_InheritInteger( p_intf, "verbose" )*/2;	// ·½±ãdebug
     changeVerbosity( i_verbosity );
     ui.verbosityBox->setValue( qMin( i_verbosity, 2 ) );
 
